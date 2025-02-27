@@ -1,4 +1,4 @@
-//Task 1 - Created Book Class
+// Task 1 - Created Book Class
 class Book {
     constructor(title, author, isbn, copies){
         this.title = title;
@@ -20,3 +20,34 @@ console.log(book1.getDetails());
 book1.updateCopies(-1);
 console.log(book1.getDetails());
 // Expected output: "Title: The Great Gatsby, Author: F. Scott Fitzgerald, ISBN: 123456, Copies: 4"
+
+
+// Task 2 - Created Borrower Class
+class Borrower{
+    constructor(name, borrowerId, borrowedBooks){
+        this.name = name;
+        this.borrowerId = borrowerId;
+        this.borrowedBooks = borrowedBooks;
+    }
+    borrowBook(book) { 
+        if (book.copies > 0) { //Check if copies are available
+            this.borrowedBooks.push(book); //Add to "borrowedBooks" array
+            book.updateCopies(-1);//Decrease the available copies
+        } else {
+            console.log(`Unfortunatly, ${book} is out of stock.`); //return if no book
+        }
+    }
+    returnBook(book) {
+        //i gen give up :((((
+    }  
+};
+const borrower1 = new Borrower("Alice Johnson", 201);
+borrower1.borrowBook("The Great Gatsby");
+console.log(borrower1.borrowedBooks);
+//Expected output: ["The Great Gatsby"]
+
+borrower1.returnBook("The Great Gatsby");
+console.log(borrower1.borrowedBooks);
+//Expected output: []
+
+
