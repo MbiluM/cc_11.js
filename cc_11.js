@@ -38,16 +38,41 @@ class Borrower{
         }
     }
     returnBook(book) {
-        //i gen give up :((((
+        const index = this.borrowedBooks.indexOf(book);
+        if (index !== -1) {
+            this.borrowedBooks.splice(index, 1); // Remove the book from borrowedBooks array
+            book.updateCopies(1); // Increase the available copies
+        } else {
+            console.log(`"${book.title}" was not borrowed by this person.`);
+        }
     }  
 };
 const borrower1 = new Borrower("Alice Johnson", 201);
 borrower1.borrowBook("The Great Gatsby");
 console.log(borrower1.borrowedBooks);
-//Expected output: ["The Great Gatsby"]
+// Expected output: ["The Great Gatsby"]
 
 borrower1.returnBook("The Great Gatsby");
 console.log(borrower1.borrowedBooks);
-//Expected output: []
+// Expected output: []
 
 
+// Task 3 - Creating Library Class
+class Library {
+    constructor() {
+        this.books = books;
+        this.borrower = borrower;
+    }
+    addBook(book) { //add a book to the library
+        this.books.push(book);
+    }
+    listBooks() {  //list all books' details
+        this.books.forEach(book => {
+            console.log(book.getDetails());
+        })
+    }
+};
+const library = new Library();
+library.addBook(book1);
+library.listBooks();
+// Expected output: "Title: The Great Gatsby, Author: F. Scott Fitzgerald, ISBN: 123456, Copies: 4"
