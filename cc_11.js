@@ -59,13 +59,19 @@ class Library {
 //Task 4 - Implemented Book Borrowing
 lendBook(BorrowerId, isbn)   // Find the borrower by their ID
     const Borrower = this.Borrowers.find(b => BorrowerId === BorrowerId);
-    if (Borrower) {
+    (Borrower) => {
         console.log(`Borrower with ID ${BorrowerId} not found.`);
-        return;
     }
-    
 
-    
+// Task 5 - Implemented Book Returns
+    returnBook(borrowerId, isbn) // Find the borrower by their ID
+        const borrower = this.borrowers.find(b => b.borrowerId === borrowerId);
+        if (borrower) {
+            console.log(`Borrower with ID ${borrowerId} not found.`);
+        }
+
+
+// Tests 1-5
 const book1 = new Book("The Great Gatsby", "F. Scott Fitzgerald", 123456, 5);
 console.log(book1.getDetails());
 // Expected output: "Title: The Great Gatsby, Author: F. Scott Fitzgerald, ISBN: 123456, Copies: 5"
@@ -74,8 +80,6 @@ book1.updateCopies(-1);
 console.log(book1.getDetails());
 // Expected output: "Title: The Great Gatsby, Author: F. Scott Fitzgerald, ISBN: 123456, Copies: 4"
     
-    
-
 const borrower1 = new Borrower("Alice Johnson", 201);
 borrower1.borrowBook("The Great Gatsby");
 console.log(borrower1.borrowedBooks);
@@ -85,15 +89,23 @@ borrower1.returnBook("The Great Gatsby");
 console.log(borrower1.borrowedBooks);
 // Expected output: []
     
-
 const library = new Library();
 library.addBook(book1);
 library.listBooks();
 // Expected output: "Title: The Great Gatsby, Author: F. Scott Fitzgerald, ISBN: 123456, Copies: 4"
     
-
 library.lendBook(201, 123456);
 console.log(book1.getDetails());
 // Expected output: "Title: The Great Gatsby, Author: F. Scott Fitzgerald, ISBN: 123456, Copies: 3"
+
 console.log(borrower1.borrowedBooks);
 // Expected output: ["The Great Gatsby"]
+
+library.returnBook(201, 123456);
+console.log(book1.getDetails());
+// Expected output: "Title: The Great Gatsby, Author: F. Scott Fitzgerald, ISBN: 123456, Copies: 4"
+
+console.log(borrower1.borrowedBooks);
+// Expected output: []
+
+// most difficult task so far
